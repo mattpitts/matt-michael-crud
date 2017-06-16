@@ -1,6 +1,7 @@
 	exports.up = function(knex, Promise) {
 	return knex.schema.createTable('users', (table) => {
 		table.increments();
+		table.text('name').notNullable();
 		table.text('email').notNullable();
 		table.text('password').notNullable();
 		table.dateTime('created_at').defaultTo(knex.fn.now());
