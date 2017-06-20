@@ -12,5 +12,13 @@ module.exports = {
 	},
 	addUserGame(game) {
 		return knex('games').insert(game, '*');
+	},
+	getUserByEmail(email) {
+		return knex('users').where('email', email).first();
+	},
+	createUser(user) {
+		return knex('users').insert(user, 'id').then(id => {
+			return id[0];
+		});
 	}
-}
+};
