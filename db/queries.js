@@ -20,5 +20,9 @@ module.exports = {
 		return knex('users').insert(user, 'id').then(id => {
 			return id[0];
 		});
+	},
+	updateUser(user, id) {
+		return knex('users').where('id', id).update(user);
 	}
+
 };

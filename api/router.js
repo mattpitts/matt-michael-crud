@@ -8,9 +8,10 @@ const queries = require('../db/queries');
 const valid = require('./validate');
 
 router.get('/users', (req, res, next) => {
+	console.log(req.signedCookies);
+	console.log('signed');
 	queries.getAll().then(users => {
 		res.json(users);
-		console.log(process.env.COOKIE_SECRET);
 	});
 });
 
@@ -71,8 +72,11 @@ router.post('/login', (req, res, next) => {
 							secure: req.app.get('env') != 'development',
 							signed: true
 						});
+						console.log(user.name);
 						res.json({
-							message: "Success!"
+							message: "Success!",
+							id: user.id,
+							name: user.name
 						});
 
 					} else {
@@ -86,6 +90,12 @@ router.post('/login', (req, res, next) => {
 
 		});
 	}
+});
+
+router.put('/users/:id', (req,res,next) => {
+	queries.updateUser(req.body).then(user => {
+		res.json(user);
+	});
 });
 
 
