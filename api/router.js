@@ -98,6 +98,12 @@ router.put('/users/:id', (req,res,next) => {
 	});
 });
 
+router.delete('/users/:id', (req,res,next) => {
+	queries.deleteUser(req.params.id).then(response => {
+		res.json(response);
+	});
+});
+
 
 
 

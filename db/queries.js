@@ -23,6 +23,8 @@ module.exports = {
 	},
 	updateUser(user, id) {
 		return knex('users').where('id', id).update(user);
+	},
+	deleteUser(id) {
+		return knex('users').where('id', id).del();
 	}
-
 };
